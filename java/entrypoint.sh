@@ -47,9 +47,3 @@ PARSED=$(echo "${STARTUP}" | sed -e 's/{{/${/g' -e 's/}}/}/g' | eval echo "$(cat
 printf "\033[1m\033[33mcontainer@pterodactyl~ \033[0m%s\n" "$PARSED"
 # shellcheck disable=SC2086
 exec env ${PARSED}
-
-
-version=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
-wget "https://chromedriver.storage.googleapis.com/${version}/chromedriver_linux64.zip"
-unzip chromedriver_linux64.zip
-rm chromedriver_linux64.zip
