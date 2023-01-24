@@ -40,10 +40,10 @@ RUN apt-get update -y
 RUN apt-get install -y google-chrome-stable
 
 # Download and install Chromedriver
-RUN wget -q --continue "http://chromedriver.storage.googleapis.com/108.0.5359.71/chromedriver_linux64.zip"
-RUN unzip ./chromedriver*
+RUN wget "http://chromedriver.storage.googleapis.com/108.0.5359.71/chromedriver_linux64.zip"
+RUN unzip chromedriver_linux64.zip
 
-COPY ./chromedriver /home/container
+COPY chromedriver /home/container
 
 USER        container
 ENV         USER=container HOME=/home/container
