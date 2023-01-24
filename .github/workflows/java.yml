@@ -32,6 +32,5 @@ jobs:
           context: ./java
           file: ./java/${{ matrix.tag }}/Dockerfile
           platforms: linux/amd64,linux/arm64
-          tags: user/app:latest
           push: true
 
