@@ -43,9 +43,5 @@ USER        container
 ENV         USER=container HOME=/home/container
 WORKDIR     /home/container
 
-RUN version=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
-RUN wget -qP . "https://chromedriver.storage.googleapis.com/${version}/chromedriver_linux64.zip"
-RUN sudo unzip -o ./chromedriver_linux64.zip -d .
-
 COPY        ./../entrypoint.sh /entrypoint.sh
 CMD         [ "/bin/bash", "/entrypoint.sh" ]
