@@ -45,7 +45,7 @@ WORKDIR     /home/container
 
 # Set up Chromedriver Environment variables
 ENV CHROMEDRIVER_VERSION 108.0.5359.71
-ENV CHROMEDRIVER_DIR /chromedriver
+ENV CHROMEDRIVER_DIR ./chromedriver
 RUN mkdir $CHROMEDRIVER_DIR
 
 # Download and install Chromedriver
