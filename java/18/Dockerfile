@@ -22,9 +22,9 @@
 
 FROM        --platform=linux/amd64 eclipse-temurin:18-jdk-jammy
 
-LABEL       author="Matthew Penner" maintainer="matthew@pterodactyl.io"
+LABEL       author="Nullified" maintainer="admin@nullisite.dev"
 
-LABEL       org.opencontainers.image.source="https://github.com/pterodactyl/yolks"
+LABEL       org.opencontainers.image.source="https://github.com/Gittified/yolks"
 LABEL       org.opencontainers.image.licenses=MIT
 
 RUN 		apt-get update -y \
