@@ -17,6 +17,20 @@ jobs:
           - 18
     steps:
       - uses: actions/checkout@v3
+      - uses: docker/metadata-action@v4
+        id: meta
+        with:
+          images: |
+            name/app
+            ghcr.io/username/app
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
       - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
         with:
@@ -32,6 +46,7 @@ jobs:
           context: ./java
           file: ./java/${{ matrix.tag }}/Dockerfile
           platforms: linux/amd64,linux/arm64
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           push: true
-          tags: |
-            ghcr.io/gittified/yolks:java_${{ matrix.tag }}
+
