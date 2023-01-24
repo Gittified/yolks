@@ -17,6 +17,12 @@ jobs:
           - 18
     steps:
       - uses: actions/checkout@v3
+      - name: Docker meta
+        uses: actions/github-script@v6
+        id: repo_slug
+        with:
+          result-encording: string
+          script: return 'ghcr.io/${{ github.repository }}'.toLowerCase()
       - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
         with:
@@ -31,7 +37,8 @@ jobs:
         with:
           context: ./java
           file: ./java/${{ matrix.tag }}/Dockerfile
-          tags: ghcr.io/gittified/yolks:latest
           platforms: linux/amd64,linux/arm64
           push: true
+          tags: |
+            ghcr.io/${{ steps.repo_slug.outputs.result }}:java_${{ matrix.tag }}
 
