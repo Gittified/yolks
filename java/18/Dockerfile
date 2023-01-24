@@ -43,17 +43,9 @@ USER        container
 ENV         USER=container HOME=/home/container
 WORKDIR     /home/container
 
-# Set up Chromedriver Environment variables
-ENV CHROMEDRIVER_VERSION 108.0.5359.71
-ENV CHROMEDRIVER_DIR ./chromedriver
-RUN mkdir $CHROMEDRIVER_DIR
-
-# Download and install Chromedriver
-RUN wget -q --continue -P $CHROMEDRIVER_DIR "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-RUN unzip $CHROMEDRIVER_DIR/chromedriver* -d $CHROMEDRIVER_DIR
-
-# Put Chromedriver into the PATH
-ENV PATH $CHROMEDRIVER_DIR:$PATH
+RUN version=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+RUN wget -qP . "https://chromedriver.storage.googleapis.com/${version}/chromedriver_linux64.zip"
+RUN sudo unzip -o ./chromedriver_linux64.zip -d .
 
 COPY        ./../entrypoint.sh /entrypoint.sh
 CMD         [ "/bin/bash", "/entrypoint.sh" ]
