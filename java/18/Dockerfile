@@ -41,16 +41,14 @@ RUN apt-get install -y google-chrome-stable
 
 # Set up Chromedriver Environment variables
 ENV CHROMEDRIVER_VERSION 108.0.5359.71
-ENV CHROMEDRIVER_DIR /home/container/chromedriver
+ENV CHROMEDRIVER_DIR /chromedriver
 RUN mkdir $CHROMEDRIVER_DIR
 
 # Download and install Chromedriver
 RUN wget -q --continue -P $CHROMEDRIVER_DIR "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
 RUN unzip $CHROMEDRIVER_DIR/chromedriver* -d $CHROMEDRIVER_DIR
 
-# Fix permissions for user
-RUN chown -R container:container $CHROMEDRIVER_DIR
-RUN chmod 755 $CHROMEDRIVER_DIR
+COPY $CHROMEDRIVER_DIR/chromedriver /home/container
 
 USER        container
 ENV         USER=container HOME=/home/container
