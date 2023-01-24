@@ -20,7 +20,7 @@
 # SOFTWARE.
 #
 
-FROM        --platform=$TARGETOS/$TARGETARCH eclipse-temurin:18-jdk-jammy
+FROM        --platform=linux/amd64 eclipse-temurin:18-jdk-jammy
 
 LABEL       author="Matthew Penner" maintainer="matthew@pterodactyl.io"
 
